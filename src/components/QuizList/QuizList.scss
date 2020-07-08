@@ -1,0 +1,19 @@
+.quiz-list {
+  border: 2px solid #fff;
+  border-radius: 5px;
+  padding: 15px 15px;
+  &__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  &__answers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  p {
+    margin: 0;
+  }
+}
