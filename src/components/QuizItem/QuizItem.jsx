@@ -9,9 +9,9 @@ class QuizItem extends React.Component {
   }
 
   render() {
-    const { answer } = this.props;
+    const { answer, answerId, result } = this.props;
     return (
-      <li className='quiz-item'>
+      <li className={`quiz-item ${result[answerId] || ''}`}>
         <button type='button' className='quiz-item__button' onClick={this.clickAnswerHandler}>
           { answer }
         </button>
@@ -23,7 +23,8 @@ class QuizItem extends React.Component {
 QuizItem.propTypes = {
   answer: PropTypes.string.isRequired,
   choiceAnswer: PropTypes.func.isRequired,
-  answerId: PropTypes.number.isRequired
+  answerId: PropTypes.number.isRequired,
+  result: PropTypes.shape({}).isRequired
 };
 
 export default QuizItem;

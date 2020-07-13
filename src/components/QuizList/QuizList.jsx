@@ -9,17 +9,20 @@ const QuizList = (props) => {
     answers,
     choiceAnswer,
     currentQuizIndex,
-    currentQuiz
+    currentQuiz,
+    result
   } = props;
   return (
     <ul className='quiz-list__answers'>
-      {answers.map((currentAnswer) => (
+      {answers.map((currentAnswer, index) => (
         <QuizItem
+          key={index}
           currentQuiz={currentQuiz}
           currentQuizIndex={currentQuizIndex}
           answer={currentAnswer.answer}
           answerId={currentAnswer.id}
           choiceAnswer={choiceAnswer}
+          result={result}
         />
       ))}
     </ul>
@@ -27,13 +30,11 @@ const QuizList = (props) => {
 };
 
 QuizList.propTypes = {
-  currentList: PropTypes.shape({
-    question: PropTypes.string
-  }).isRequired,
   answers: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   choiceAnswer: PropTypes.func.isRequired,
   currentQuizIndex: PropTypes.number.isRequired,
-  currentQuiz: PropTypes.shape({}).isRequired
+  currentQuiz: PropTypes.shape({}).isRequired,
+  result: PropTypes.shape({}).isRequired
 };
 
 export default QuizList;

@@ -9,7 +9,8 @@ const ActiveQuiz = (props) => {
     answers,
     quizLength,
     choiceAnswer,
-    currentQuiz
+    currentQuiz,
+    result
   } = props;
   return (
     <div className='quiz-list'>
@@ -22,6 +23,7 @@ const ActiveQuiz = (props) => {
         currentQuizIndex={answerNumber}
         answers={answers}
         choiceAnswer={choiceAnswer}
+        result={result}
       />
     </div>
   );
@@ -34,7 +36,8 @@ ActiveQuiz.propTypes = {
   choiceAnswer: PropTypes.func.isRequired,
   currentQuiz: PropTypes.shape({
     question: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  result: PropTypes.shape({}).isRequired
 };
 
 export default ActiveQuiz;
