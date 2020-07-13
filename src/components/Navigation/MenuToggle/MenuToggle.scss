@@ -1,0 +1,18 @@
+.menu-toggle {
+  position: fixed;
+  top: 3%;
+  color: #fff;
+  font-size: 30px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  z-index: 10;
+  transition: all ease-in-out .4s;
+  &__open {
+    left: 300px;
+  }
+  &__close {
+    left: 3%;
+  }
+}

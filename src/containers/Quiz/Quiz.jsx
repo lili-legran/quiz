@@ -102,6 +102,14 @@ class Quiz extends React.Component {
     }
   }
 
+  retryHandler = () => {
+    this.setState({
+      result: {},
+      isFinished: false,
+      activeQuestion: 0
+    });
+  }
+
   render() {
     const {
       quiz,
@@ -134,6 +142,7 @@ class Quiz extends React.Component {
                   answerState={answerState}
                   quizLength={quiz.length}
                   successAnswers={successAnswers}
+                  onRetry={this.retryHandler}
                 />
               )
           }
