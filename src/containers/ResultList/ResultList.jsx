@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Result from '../../components/Result/Result';
 import Button from '../../components/UI/Button/Button';
 import './ResultList.scss';
@@ -28,7 +29,9 @@ const result = (props) => {
       </p>
       <div className='result-list__buttons'>
         <Button buttonText='Try again' onClick={onRetry} type='primary' />
-        <Button buttonText='To the test list' />
+        <Link to='/'>
+          <Button buttonText='To the test list' />
+        </Link>
       </div>
     </div>
   );

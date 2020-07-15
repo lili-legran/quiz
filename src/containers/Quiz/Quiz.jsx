@@ -49,6 +49,11 @@ class Quiz extends React.Component {
     ]
   }
 
+  // componentDidMount() {
+  //   const { match } = this.props;
+  //   console.log('Quiz ID = ', match.params.id);
+  // }
+
   choiceAnswerHandler = (answerId) => {
     const {
       quiz,

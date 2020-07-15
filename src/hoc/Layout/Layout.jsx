@@ -9,14 +9,13 @@ class Layout extends React.Component {
   state = {
     isOpenMenu: false,
     drawersList: [
-      'Link 1',
-      'Link 2',
-      'Link 3'
+      { to: '/', label: 'Quiz List', exact: true },
+      { to: '/auth', label: 'Authorization', exact: false },
+      { to: '/quiz-creator', label: 'Quiz Creator', exact: false }
     ]
   }
 
   toggleMenuHandler = () => {
-    console.log(123);
     const { isOpenMenu } = this.state;
     this.setState({
       isOpenMenu: !isOpenMenu

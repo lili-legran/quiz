@@ -13,6 +13,7 @@ const DrawerList = (props) => {
           <Drawer
             key={index}
             drawerItem={drawerItem}
+            closeMenu={closeMenu}
           />
         ))}
       </ul>
