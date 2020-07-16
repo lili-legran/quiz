@@ -1,7 +1,7 @@
 .drawers-list {
   height: 100vh;
   width: 300px;
-  background: rgba(98, 226, 177, 0.94);
+  background: rgba(221, 221, 221, 0.94);
   z-index: 10;
   position: fixed;
   top: 0;
@@ -9,12 +9,12 @@
   box-sizing: border-box;
   list-style: none;
   margin: 0;
-  box-shadow: 0 0 10px 5px #216c4f;
+  box-shadow: 0 0 10px 5px rgba(77, 77, 77, 0.94);
   transition: all ease-in-out .4s;
   &.open {
     left: 0;
   }
   &.close {
-    left: -300px;
+    left: -310px;
   }
 }

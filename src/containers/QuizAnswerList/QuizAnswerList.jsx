@@ -21,12 +21,10 @@ export default class QuizAnswerList extends React.Component {
   render() {
     return (
       <div className='quiz-answer-list'>
-        <div>
-          <h1>Quiz List</h1>
-          <ul>
-            {this.renderQuizes()}
-          </ul>
-        </div>
+        <h1>Quiz List</h1>
+        <ul>
+          {this.renderQuizes()}
+        </ul>
       </div>
     );
   }
