@@ -3,9 +3,19 @@ import PropTypes from 'prop-types';
 import './Button.scss';
 
 const Button = (props) => {
-  const { buttonText, onClick, type } = props;
+  const {
+    buttonText,
+    onClick,
+    type,
+    disabled
+  } = props;
   return (
-    <button type='button' className={`button ${type === 'primary' ? 'button__primary' : ''}`} onClick={onClick}>
+    <button
+      type='button'
+      className={`button ${type === 'primary' ? 'button__primary' : ''}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {buttonText}
     </button>
   );
@@ -14,7 +24,8 @@ const Button = (props) => {
 Button.propTypes = {
   buttonText: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  disabled: PropTypes.bool.isRequired
 };
 
 export default Button;

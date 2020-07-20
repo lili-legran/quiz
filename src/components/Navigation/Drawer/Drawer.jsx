@@ -21,7 +21,10 @@ const Drawer = (props) => {
 
 Drawer.propTypes = {
   // eslint-disable-next-line react/require-default-props
-  drawerItem: PropTypes.string,
+  drawerItem: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({})
+  ]),
   closeMenu: PropTypes.func.isRequired
 };
 

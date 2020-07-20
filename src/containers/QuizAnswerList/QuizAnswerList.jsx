@@ -1,4 +1,3 @@
-/* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './QuizAnswerList.scss';
@@ -6,16 +5,13 @@ import './QuizAnswerList.scss';
 export default class QuizAnswerList extends React.Component {
   // eslint-disable-next-line class-methods-use-this
   renderQuizes() {
-    return [1, 2, 3].map((quiz, index) => {
-      return (
-        <li key={index}>
-          <NavLink to={`/quiz/${quiz}`}>
-            Quiz
-            {quiz}
-          </NavLink>
-        </li>
-      );
-    });
+    return [1, 2, 3].map((quiz, index) => (
+      <li key={index}>
+        <NavLink to={`/quiz/${quiz}`}>
+          {`Quiz${quiz}`}
+        </NavLink>
+      </li>
+    ));
   }
 
   render() {
