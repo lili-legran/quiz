@@ -19,7 +19,7 @@ const QuizList = (props) => {
           key={index}
           currentQuiz={currentQuiz}
           currentQuizIndex={currentQuizIndex}
-          answer={currentAnswer.answer}
+          answer={currentAnswer.text}
           answerId={currentAnswer.id}
           choiceAnswer={choiceAnswer}
           result={result}

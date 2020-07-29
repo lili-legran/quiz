@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
 import React from 'react';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import Select from '../../components/UI/Select/Select';
+import axios from '../../axios/axios';
 import { validate, validateForm } from './form/formFramework';
 import './QuizCreator.scss';
 
@@ -52,7 +54,7 @@ export default class QuizCreator extends React.Component {
 
   addQuestionHandler = (event) => {
     event.preventDefault();
-    const { quiz, rightAnswerId } = this.state;
+    const { quiz } = this.state;
     const { formControls } = this.state;
     const quizCopy = [...quiz];
     const index = quizCopy.length + 1;
@@ -68,7 +70,8 @@ export default class QuizCreator extends React.Component {
     const questionItem = {
       question: question.value,
       id: index,
-      rightAnswerIdCopy: rightAnswerId,
+      // eslint-disable-next-line react/destructuring-assignment
+      rightAnswerId: this.state.rightAnswerId,
       answers: [
         { text: option1.value, id: option1.id },
         { text: option2.value, id: option2.id },
@@ -87,9 +90,15 @@ export default class QuizCreator extends React.Component {
     });
   }
 
-  createQuizHandler = (event) => {
+  createQuizHandler = async (event) => {
     event.preventDefault();
-    // TODO: обработчик клика на кнопку создания квиза, Server
+
+    const { quiz } = this.state;
+    try {
+      await axios.post('potter-quizes.json', quiz);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   changeInputHandler = (value, controlName) => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
@@ -5,6 +6,7 @@ import is from 'is_js';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import './Auth.scss';
+import axios from '../../axios/axios';
 
 export default class Auth extends React.Component {
   state = {
@@ -37,12 +39,36 @@ export default class Auth extends React.Component {
     }
   }
 
-  loginHandler = () => {
+  loginHandler = async () => {
+    const { formControls } = this.state;
 
+    const authData = {
+      email: formControls.email.value,
+      password: formControls.password.value,
+      returnSecureToken: true
+    };
+
+    try {
+      await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDOQXf2d47CDvVmjyVX7fn0iAeQYR6M26U', authData);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  registerHandler = () => {
+  registerHandler = async () => {
+    const { formControls } = this.state;
 
+    const authData = {
+      email: formControls.email.value,
+      password: formControls.password.value,
+      returnSecureToken: true
+    };
+
+    try {
+      await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDOQXf2d47CDvVmjyVX7fn0iAeQYR6M26U', authData);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   submitHandler = (event) => {
