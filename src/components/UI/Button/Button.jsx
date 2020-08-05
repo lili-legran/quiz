@@ -23,11 +23,11 @@ const Button = (props) => {
 
 Button.propTypes = {
   buttonText: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired,
-  disabled: PropTypes.oneOfType([
-    PropTypes.bool
-  ]).isRequired
+  /* eslint-disable react/require-default-props */
+  onClick: PropTypes.func,
+  type: PropTypes.string,
+  disabled: PropTypes.bool
+  /* eslint-enable react/require-default-props */
 };
 
 export default Button;

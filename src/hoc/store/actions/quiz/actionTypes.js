@@ -1,0 +1,11 @@
+/* eslint-disable import/prefer-default-export */
+export const FETCH_QUIZES_START = 'FETCH_QUIZES_START';
+export const FETCH_QUIZES_SUCCESS = 'FETCH_QUIZES_SUCCESS';
+export const FETCH_QUIZES_ERROR = 'FETCH_QUIZES_ERROR';
+export const FETCH_QUIZ_SUCCESS = 'FETCH_QUIZ_SUCCESS';
+
+export const QUIZ_NEXT_QUESTION = 'QUIZ_NEXT_QUESTION';
+export const QUIZ_SET_RESULT = 'QUIZ_SET_RESULT';
+export const SET_ANSWER_STATE = 'SET_ANSWER_STATE';
+export const SET_SUCCESS_ANSWERS = 'SET_SUCCESS_ANSWERS';
+export const QUIZ_RETRY = 'QUIZ_RETRY';

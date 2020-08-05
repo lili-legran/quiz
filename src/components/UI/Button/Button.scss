@@ -6,8 +6,12 @@
   background: #1532ff;
   color: #fff;
   margin-right: 10px;
+  transition: all .3s;
   outline: none;
   cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 6px 2px #0d22b1;
+  }
   &__primary {
     background: #d6ec49;
     color: #000;
