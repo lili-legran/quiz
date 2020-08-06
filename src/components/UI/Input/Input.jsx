@@ -42,8 +42,10 @@ Input.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired,
-  errorMessage: PropTypes.string.isRequired
+  errorMessage: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  type: PropTypes.string
+  // eslint-enable-next-line react/require-default-props
 };
 
 export default Input;

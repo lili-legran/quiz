@@ -9,6 +9,7 @@
     "react/no-array-index-key": "off",
     "spaced-comment": "off",
     "no-prototype-builtins": "off",
-    "no-shadow": "off"
+    "no-shadow": "off",
+    "import/prefer-default-export": "off"
   }
 }

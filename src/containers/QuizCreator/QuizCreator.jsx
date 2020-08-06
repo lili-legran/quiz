@@ -1,10 +1,13 @@
 /* eslint-disable no-console */
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { validate, validateForm } from './form/formFramework';
+import { createQuizQuestion } from '../../hoc/store/actions/quizCreator/actionCreators';
+import { finishCreateQuiz } from '../../hoc/store/actions/quizCreator';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import Select from '../../components/UI/Select/Select';
-import axios from '../../axios/axios';
-import { validate, validateForm } from './form/formFramework';
 import './QuizCreator.scss';
 
 function createInput(config, validation) {
@@ -40,9 +43,8 @@ function createFormControl() { //опросник
   };
 }
 
-export default class QuizCreator extends React.Component {
+class create extends React.Component {
   state = {
-    quiz: [], //результат инпутов
     isFormValid: false,
     rightAnswerId: 1,
     formControls: createFormControl()
@@ -54,10 +56,8 @@ export default class QuizCreator extends React.Component {
 
   addQuestionHandler = (event) => {
     event.preventDefault();
-    const { quiz } = this.state;
+    const { quiz, createQuizQuestion } = this.props;
     const { formControls } = this.state;
-    const quizCopy = [...quiz];
-    const index = quizCopy.length + 1;
 
     const {
       question,
@@ -69,7 +69,7 @@ export default class QuizCreator extends React.Component {
 
     const questionItem = {
       question: question.value,
-      id: index,
+      id: quiz.length + 1,
       // eslint-disable-next-line react/destructuring-assignment
       rightAnswerId: this.state.rightAnswerId,
       answers: [
@@ -80,25 +80,28 @@ export default class QuizCreator extends React.Component {
       ]
     };
 
-    quizCopy.push(questionItem);
+    console.log('questionItem', questionItem);
+    createQuizQuestion(questionItem);
 
     this.setState({
-      quiz: quizCopy,
       isFormValid: false,
       rightAnswerId: 1,
       formControls: createFormControl()
     });
   }
 
-  createQuizHandler = async (event) => {
+  createQuizHandler = (event) => {
     event.preventDefault();
 
-    const { quiz } = this.state;
-    try {
-      await axios.post('potter-quizes.json', quiz);
-    } catch (error) {
-      console.log(error);
-    }
+    const { finishCreateQuiz } = this.props;
+
+    this.setState({
+      isFormValid: false,
+      rightAnswerId: 1,
+      formControls: createFormControl()
+    });
+
+    finishCreateQuiz();
   }
 
   changeInputHandler = (value, controlName) => {
@@ -146,7 +149,8 @@ export default class QuizCreator extends React.Component {
   }
 
   render() {
-    const { rightAnswerId, isFormValid, quiz } = this.state;
+    const { rightAnswerId, isFormValid } = this.state;
+    const { quiz } = this.props;
     const select = (
       <Select
         label='Сhoose the correct answer'
@@ -160,6 +164,8 @@ export default class QuizCreator extends React.Component {
         ]}
       />
     );
+
+    console.log('quiz', quiz);
 
     return (
       <div className='quiz-creator'>
@@ -184,3 +190,26 @@ export default class QuizCreator extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    quiz: state.create.quiz
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    createQuizQuestion: (item) => dispatch(createQuizQuestion(item)),
+    finishCreateQuiz: () => dispatch(finishCreateQuiz())
+  };
+}
+
+export default connect(
+  mapStateToProps, mapDispatchToProps
+)(create);
+
+create.propTypes = {
+  quiz: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  finishCreateQuiz: PropTypes.func.isRequired,
+  createQuizQuestion: PropTypes.func.isRequired
+};
