@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import MenuToggle from '../../components/Navigation/MenuToggle/MenuToggle';
 import DrawersList from '../../components/Navigation/DrawersList/DrawersList';
 import './Layout.scss';
@@ -8,11 +9,6 @@ import './Layout.scss';
 class Layout extends React.Component {
   state = {
     isOpenMenu: false,
-    drawersList: [
-      { to: '/', label: 'Quiz List', exact: true },
-      { to: '/auth', label: 'Authorization', exact: false },
-      { to: '/quiz-creator', label: 'Quiz Creator', exact: false }
-    ]
   }
 
   toggleMenuHandler = () => {
@@ -29,8 +25,8 @@ class Layout extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
-    const { isOpenMenu, drawersList } = this.state;
+    const { children, isAuthenticated } = this.props;
+    const { isOpenMenu } = this.state;
     return (
       <div className='layout'>
         <MenuToggle
@@ -38,9 +34,9 @@ class Layout extends React.Component {
           isOpenMenu={isOpenMenu}
         />
         <DrawersList
-          drawersList={drawersList}
           isOpenMenu={isOpenMenu}
           closeMenu={this.closeMenuHandler}
+          isAuthenticated={isAuthenticated}
         />
         <div className='layout__main'>
           {children}
@@ -50,11 +46,18 @@ class Layout extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: !!state.authorization.token
+  };
+}
+
+export default connect(mapStateToProps)(Layout);
+
 Layout.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.string
-  ]).isRequired
+  ]).isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
-
-export default Layout;

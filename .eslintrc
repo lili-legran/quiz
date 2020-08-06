@@ -11,5 +11,9 @@
     "no-prototype-builtins": "off",
     "no-shadow": "off",
     "import/prefer-default-export": "off"
+  },
+  "globals": {
+    "localStorage": true,
+    "fetch": true
   }
 }

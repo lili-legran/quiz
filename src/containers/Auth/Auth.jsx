@@ -2,13 +2,15 @@
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import is from 'is_js';
+import { auth } from '../../hoc/store/actions/authorization';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import './Auth.scss';
-import axios from '../../axios/axios';
 
-export default class Auth extends React.Component {
+class Auth extends React.Component {
   state = {
     isFormValid: false,
     formControls: {
@@ -39,36 +41,26 @@ export default class Auth extends React.Component {
     }
   }
 
-  loginHandler = async () => {
+  loginHandler = () => {
     const { formControls } = this.state;
+    const { auth } = this.props;
 
-    const authData = {
-      email: formControls.email.value,
-      password: formControls.password.value,
-      returnSecureToken: true
-    };
-
-    try {
-      await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDOQXf2d47CDvVmjyVX7fn0iAeQYR6M26U', authData);
-    } catch (error) {
-      console.log(error);
-    }
+    auth(
+      formControls.email.value,
+      formControls.password.value,
+      true
+    );
   }
 
-  registerHandler = async () => {
+  registerHandler = () => {
     const { formControls } = this.state;
+    const { auth } = this.props;
 
-    const authData = {
-      email: formControls.email.value,
-      password: formControls.password.value,
-      returnSecureToken: true
-    };
-
-    try {
-      await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDOQXf2d47CDvVmjyVX7fn0iAeQYR6M26U', authData);
-    } catch (error) {
-      console.log(error);
-    }
+    auth(
+      formControls.email.value,
+      formControls.password.value,
+      false
+    );
   }
 
   submitHandler = (event) => {
@@ -156,3 +148,17 @@ export default class Auth extends React.Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
+  };
+}
+
+export default connect(
+  null, mapDispatchToProps
+)(Auth);
+
+Auth.propTypes = {
+  auth: PropTypes.func.isRequired
+};

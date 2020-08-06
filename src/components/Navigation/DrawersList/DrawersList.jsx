@@ -5,15 +5,35 @@ import Backdrop from '../../UI/Backdrop/Backdrop';
 import './DrawersList.scss';
 
 const DrawerList = (props) => {
-  const { drawersList, isOpenMenu, closeMenu } = props;
+  const {
+    isOpenMenu,
+    closeMenu,
+    isAuthenticated
+  } = props;
+  const links = [
+    { to: '/', label: 'Quiz List', exact: true }
+  ];
+
+  if (isAuthenticated) {
+    links.push(
+      { to: '/quiz-creator', label: 'Quiz Creator', exact: false },
+      { to: '/logout', label: 'Exit', exact: false }
+    );
+  } else {
+    links.push(
+      { to: '/auth', label: 'Authorization', exact: false }
+    );
+  }
+
   return (
     <>
       <ul className={`drawers-list ${isOpenMenu ? 'open' : 'close'}`}>
-        { drawersList.map((drawerItem, index) => (
+        { links.map((drawerItem, index) => (
           <Drawer
             key={index}
             drawerItem={drawerItem}
             closeMenu={closeMenu}
+            isAuthenticated={isAuthenticated}
           />
         ))}
       </ul>
@@ -23,9 +43,9 @@ const DrawerList = (props) => {
 };
 
 DrawerList.propTypes = {
-  drawersList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   isOpenMenu: PropTypes.bool.isRequired,
-  closeMenu: PropTypes.func.isRequired
+  closeMenu: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 export default DrawerList;
